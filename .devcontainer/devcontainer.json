@@ -1,0 +1,6 @@
+{
+    "postCreateCommand": "/bin/bash ./.devcontainer/install.sh",
+    "extensions": [
+        "ms-python.python"
+    ]
+}
