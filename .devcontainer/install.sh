@@ -15,9 +15,13 @@ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 
 # reload bashrc
 source ~/.bashrc
+. ~/.bashrc
 
 # install Python 3.8.1 from pyenv
 pyenv install 3.8.1
+
+python3 -m venv venv 
+# install flask
 
 # install github hub
 wget https://github.com/github/hub/releases/download/v2.13.0/hub-linux-amd64-2.13.0.tgz
