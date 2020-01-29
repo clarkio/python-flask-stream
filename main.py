@@ -1,11 +1,36 @@
-from flask import Flask, request, jsonify
+from flask import (Flask, escape, g, jsonify, redirect, request, session,
+                   url_for)
+
+from login_decorator import login_required
 
 app = Flask(__name__)
+app.secret_key = 'oiefjasdfasdfwfe230j23iajsdflkj@#@#$fjfi'
 
 
 @app.route('/')  # localhost:5000/
 def hello():
-    return 'Hello from VS Online'
+    return 'Hello from VS Online Twitch'
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('hello'))
+    return '''
+        <form method="post">
+        <div>Hello</div>
+            <p><input type=text name=username>
+            <p><input type=submit value=Login>
+        </form>
+    '''
+
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('hello'))
 
 
 @app.route('/twitch', methods=['GET'])  # localhost:5000/twitch
@@ -14,6 +39,7 @@ def show_twitch():
 
 
 @app.route('/twitch/<username>', methods=['GET', 'POST'])
+@login_required
 def show_twitch_user(username):
     if request.method == 'GET':
         return f'This is {username}\'s page'

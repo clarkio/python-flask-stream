@@ -20,8 +20,11 @@ source ~/.bashrc
 # install Python 3.8.1 from pyenv
 pyenv install 3.8.1
 
-python3 -m venv venv 
+# activate python 3.8.1
+pyenv activate 3.8.1
+
 # install flask
+pip install Flask
 
 # install github hub
 wget https://github.com/github/hub/releases/download/v2.13.0/hub-linux-amd64-2.13.0.tgz
